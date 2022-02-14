@@ -1,9 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 // import services from './services/index';
-import userRoute from './route/user';
-
-
+import userRoute from './routes/user.route';
 const app = express();
 
 dotenv.config();
@@ -11,11 +9,11 @@ dotenv.config();
 
 app.use(express.json());
 
-const { PORT, PGHOST } = process.env;
+const { PORT } = process.env;
 
-app.use('/api/v1', userRoute)
+app.use(userRoute)
 // app.use('/', services);
 
 app.listen(PORT, () => {
-  console.log(`server is running on http://${PGHOST}:${PORT}`); 
+  console.log(`server is running on http://:${PORT}`); 
 });
