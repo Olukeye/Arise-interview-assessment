@@ -9,6 +9,7 @@ dotenv.config();
 
 app.use(express.json());
 
+
 const { PORT, PGHOST } = process.env;
 
 app.use(userRoute)
