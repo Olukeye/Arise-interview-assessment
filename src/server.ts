@@ -9,11 +9,11 @@ dotenv.config();
 
 app.use(express.json());
 
-const { PORT } = process.env;
+const { PORT, PGHOST } = process.env;
 
 app.use(userRoute)
 // app.use('/', services);
 
 app.listen(PORT, () => {
-  console.log(`server is running on http://:${PORT}`); 
+  return console.log(`server is running on http://${PGHOST}:${PORT}`); 
 });
