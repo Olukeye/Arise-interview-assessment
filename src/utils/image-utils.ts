@@ -1,4 +1,4 @@
-export const postFilter = function(req:any, file, any, cb:any) {
+export const postFilter = function(req:any, file: any, cb:any) {
     // Accept only images
     if(!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
         req.fileValidationError = 'Only supports these files!';

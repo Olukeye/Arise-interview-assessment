@@ -1,5 +1,4 @@
-import utils from 'util';
-import { Request } from 'express';
+import util from 'util';
 import multer from 'multer';
 import { customAlphabet } from 'nanoid'
 import path from 'path';
@@ -11,21 +10,21 @@ export const nanoid = customAlphabet("abcdefghijjlmnopqrstuvwxyz", 10)
 
 
 let storage = multer.diskStorage({
-    destination: (req:Request, file, cb) => {
+    destination: (_req, _file, cb) => {
         cb(null, __basedir + '/resources/static/assets/uploads/');
     },
-    filename:(req, File, cb) => {
-        const ext = path.extname(File.originalname)
+    filename:(_req, file, cb) => {
+        const ext = path.extname(file.originalname)
         const fileName =`post_${nanoid()}${Date.now()}${ext}`
         cb(null, fileName);
-    }
+    },
 });
 
 let uploadFile = multer({
     storage: storage,
     limits: { fileSize: maxSize },
-    fileFilter: postFilter,
+    fileFilter: postFilter
 }).single('file');
 
-let uploadFileMiddleware = utils.promisify(uploadFile);
+let uploadFileMiddleware = util.promisify(uploadFile);
 export default uploadFileMiddleware;

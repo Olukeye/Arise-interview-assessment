@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import uploadFileMiddleware from "../middleware/uploads";
 import { BadRequestError } from "../errors";
+import { uploadFile } from  "../middleware/aws-s3"
 
 
 export const postUpload = async (req: Request, res: Response, next: NextFunction) => {
-    const directoryPath = __dirname+ "/resources/static/assets/uploads/";
+    const directoryPath = __basedir + "/resources/static/assets/uploads/";
     await uploadFileMiddleware(req, res)
-    const {caption, text, postId} = req.body
-    const {commentId} = req.params
+    const {caption, text} = req.body
     const file = req.file
     const fileName = req.file?.filename
 
@@ -15,8 +15,6 @@ export const postUpload = async (req: Request, res: Response, next: NextFunction
         caption?: string
         img_url?: string
         text?: string
-        postId?: number
-        commentId?: number
     } = {}
 
     if (caption) {
@@ -27,9 +25,6 @@ export const postUpload = async (req: Request, res: Response, next: NextFunction
 
     if (text) payload.text = text
         
-    if (postId) payload.postId = postId as any as number
-
-    if (commentId) payload.commentId = commentId as any as number
 
     if (file) {
         payload.img_url = directoryPath + fileName
@@ -37,4 +32,5 @@ export const postUpload = async (req: Request, res: Response, next: NextFunction
     }
     
     return payload
-}
+};
+
