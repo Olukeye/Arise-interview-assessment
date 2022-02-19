@@ -4,8 +4,8 @@ import {QueryResult} from 'pg';
 
 export const getUsers = async(req: Request, res: Response ): Promise<Response> => {
     try{
-        const response:QueryResult = await pool.query('SELECT FROM person');
-        return res.status(201).json(response.row)
+        const response:QueryResult = await pool.query('SELECT * FROM person');
+        return res.status(201).json(response.rows)
     } catch(e) {
         return res.status(500).json(e)
     }
