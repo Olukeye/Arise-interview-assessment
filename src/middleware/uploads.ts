@@ -2,7 +2,7 @@ import util from 'util';
 import multer from 'multer';
 import { customAlphabet } from 'nanoid'
 import path from 'path';
-import { postFilter } from '../utils/image-utils';
+import { postFilter } from '../../utils/image-utils';
 const maxSize = 2 * 102400 ;
 
 

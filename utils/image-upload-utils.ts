@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import uploadFileMiddleware from "../middleware/uploads";
-import { BadRequestError } from "../errors";
-import { uploadFile } from  "../middleware/aws-s3"
+import uploadFileMiddleware from "../src/middleware/uploads";
+import { BadRequestError } from "../src/errors";
+import { uploadFile } from  "../src/middleware/aws-s3"
 
 
 export const postUpload = async (req: Request, res: Response, next: NextFunction) => {
