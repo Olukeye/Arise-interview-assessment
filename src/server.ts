@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: false}))
 
 const { PORT, PGHOST } = process.env;
 
-app.use(userRoute)
+app.use('/api', userRoute)
 // app.use('/', services);
 
 app.listen(PORT, () => {

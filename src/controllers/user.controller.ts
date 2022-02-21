@@ -24,3 +24,9 @@ export const Register = async(req:Request, res:Response): Promise<Response>=> {
         }
     });
 }
+
+export const getUserById = async(req:Request, res:Response):Promise<Response> => {
+    const id = parseInt(req.params.id);
+    const response:QueryResult = await pool.query('SELECT * FROM person WHERE id= $1', [id]);
+    return res.status(201).json(response.rows);
+}
