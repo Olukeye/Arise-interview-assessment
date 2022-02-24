@@ -11,7 +11,6 @@ export const getUsers = async(req: Request, res: Response ): Promise<Response> =
     }
 }
 
-
 export const getUserById = async(req:Request, res:Response):Promise<Response> => {
     try{
         const id = parseInt(req.params.id);
@@ -20,6 +19,13 @@ export const getUserById = async(req:Request, res:Response):Promise<Response> =>
     } catch (e) {
         return res.status(500).json(e)
     }
+}
+
+export const updateUser = async(req:Request, res:Response):Promise<Response> => {
+    const id = parseInt(req.params.id);
+    const {full_name} = req.body;
+    const response:QueryResult = await pool.query('UPDATE person SET full_name = $1 WHERE id = $2', [full_name, id])
+    return res.status(201).send(`User ${id} has been updated successfjully!!`)
 }
 
 export const deleteUser = async(req:Request, res:Response): Promise<Response> => {
